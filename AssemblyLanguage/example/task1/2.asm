@@ -1,0 +1,127 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+    numbers1 DW 10 DUP(?)
+    numbers2 DW 10 DUP(?)
+    max1 DW ?
+    max2 DW ?
+    newline DB 0DH, 0AH, '$'
+
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    MOV CX, 10
+    MOV SI, 0
+INPUT_LOOP1:
+    CALL READ_INT
+    MOV numbers1[SI], AX
+    ADD SI, 2
+    LOOP INPUT_LOOP1
+
+    MOV CX, 10
+    MOV SI, 0
+INPUT_LOOP2:
+    CALL READ_INT
+    MOV numbers2[SI], AX
+    ADD SI, 2
+    LOOP INPUT_LOOP2
+
+    CALL FIND_MAX1
+    CALL FIND_MAX2
+
+    MOV DX, OFFSET newline
+    MOV AH, 09H
+    INT 21H
+    CALL PRINT_MAX1
+    MOV DX, OFFSET newline
+    MOV AH, 09H
+    INT 21H
+    CALL PRINT_MAX2
+
+    MOV AH, 4CH
+    INT 21H
+MAIN ENDP
+
+READ_INT PROC
+    MOV CX, 0
+    MOV AX, 0
+    MOV SI, 0
+NEXT_DIGIT:
+    MOV AH, 01H
+    INT 21H
+    CMP AL, 0DH
+    JE END_INPUT
+    SUB AL, '0'
+    MOV DX, CX
+    MOV CX, 10
+    MUL CX
+    ADD AX, DX
+    JMP NEXT_DIGIT
+END_INPUT:
+    RET
+READ_INT ENDP
+
+FIND_MAX1 PROC
+    MOV SI, 0
+    MOV AX, numbers1[SI]
+    MOV CX, 9
+CHECK_NEXT1:
+    ADD SI, 2
+    CMP numbers1[SI], AX
+    JLE SKIP1
+    MOV AX, numbers1[SI]
+SKIP1:
+    LOOP CHECK_NEXT1
+    MOV max1, AX
+    RET
+FIND_MAX1 ENDP
+
+FIND_MAX2 PROC
+    MOV SI, 0
+    MOV AX, numbers2[SI]
+    MOV CX, 9
+CHECK_NEXT2:
+    ADD SI, 2
+    CMP numbers2[SI], AX
+    JLE SKIP2
+    MOV AX, numbers2[SI]
+SKIP2:
+    LOOP CHECK_NEXT2
+    MOV max2, AX
+    RET
+FIND_MAX2 ENDP
+
+PRINT_MAX1 PROC
+    MOV AX, max1
+    CALL PRINT_INT
+    RET
+PRINT_MAX1 ENDP
+
+PRINT_MAX2 PROC
+    MOV AX, max2
+    CALL PRINT_INT
+    RET
+PRINT_MAX2 ENDP
+
+PRINT_INT PROC
+    MOV CX, 0
+    MOV BX, 10
+CONVERT_LOOP:
+    MOV DX, 0
+    DIV BX
+    PUSH DX
+    INC CX
+    CMP AX, 0
+    JNE CONVERT_LOOP
+PRINT_LOOP:
+    POP DX
+    ADD DL, '0'
+    MOV AH, 02H
+    INT 21H
+    LOOP PRINT_LOOP
+    RET
+PRINT_INT ENDP
+
+END MAIN

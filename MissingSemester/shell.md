@@ -147,6 +147,8 @@ sudo || do as su || #
 # 第二讲 shell 脚本和工具
   
 - `''` 和 `""` 的区别: ''原样输出 ""解析变量
+  ```
+  echo "in $(pwd)"
 - `vim`: 文本编辑器
   ```
   vim mcd.sh
@@ -172,5 +174,42 @@ sudo || do as su || #
 - `$@`: "$@" 把每个参数当作字符串，传递给其他命令 $@空格为分隔符传输
   
 - `通配符`: ls *.sh || ls project?
-- `{}`: touch {a,b}/{x,y}.txt  笛卡尔积
-
+- `{}`: mkdir {a,b}  touch {a,b}/{x,y}.txt  笛卡尔积
+- 
+- '<(命令)' : 命令替换 将命令的输出作为参数传递给其他命令
+  ``` 
+  cat <(ls)<((ls ..))
+  ```得到当前目录和父目录
+- 'shebang': 如python 对于大多数系统: #!/usr/bin/env python3
+  ```
+    可以： ./aa.py a b c
+    否则： python aa.py a b c
+  ```
+- 使用tldr ：下载node.js  命令行 npm install -g tldr
+- grep : 文本搜索工具 grep -R foobar 目录中搜foobar 返回文件名和所在行 
+- `find` : 文件搜索工具 
+  find . -name "*.sh" 搜索当前目录下所有以 .sh 结尾的文件  
+  find . -path '**/test/*.py' - type f 搜索当前目录下所有以.py 结尾的文件
+  find. -path '**/test/*.py' -type f -exec python {} \; 搜索当前目录下所有以.py 结尾的文件并执行python
+  find . -name "*.tmp" -exec rm {} \; 删除当前目录下所有以.tmp 结尾的文件
+  locate: 文件搜索工具 更快 但是需要更新数据库
+- 'ripgrep': 文件搜索工具 更快 但是需要安装
+  rg "import numpy" -t py -C 5 /d/code
+                    type   上下文行数
+  rg -u --files-without-match "^#\!!" -t sh
+  搜索当前working directory下所有.sh文件，不包含以#!开头的行
+  - `history` : 查看历史命令
+   history | grep "ls" 搜索历史命令中包含ls的命令
+  - `Ctrl R` : 搜索历史命令
+  -`fzf`: 交互式搜索工具
+  cat example.sh | fzf
+  快速目录列表
+  - `tree`: 目录树
+# Vim
+- `i`: 插入模式 insert
+- `r`: 替换模式 replace
+- `v`: 可视模式 visual
+- `V`|`shift v`: 可视行模式 visual line
+- `ctrl v`: 块选择模式 block select
+- `esc`: 退出模式
+- `:`: 命令模式 command line
