@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/code/py/task2",
-      "program": "d:/code/py/task2/build/Debug/outDebug",
+      "cwd": "d:/code/cpp/Sequential List",
+      "program": "d:/code/cpp/Sequential List/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

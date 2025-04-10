@@ -17,7 +17,7 @@ main endp
 ReverseInt proc
 	push ebp
 	mov  ebp,esp
-	sub  esp,4  ;;ÓÃÓÚÔİ´æ·µ»ØÖµ 
+	sub  esp,4  ;;ï¿½ï¿½ï¿½ï¿½ï¿½İ´æ·µï¿½ï¿½Öµ 
 	pushad
 	mov eax,[ebp+8];;n
 	
@@ -42,9 +42,9 @@ again_1:			;;while(j<i){
 	inc esi			;;j++;
 	jmp again_1		;;}
 fina_1: 
-	mov [ebp-4],eax ;;·µ»ØÖµÔİ´æÓÚÕ» 
+	mov [ebp-4],eax ;;ï¿½ï¿½ï¿½ï¿½Öµï¿½İ´ï¿½ï¿½ï¿½Õ» 
 	popad
-	mov eax,[ebp-4];;È¡·µ»ØÖµÓÚÕ»ÇÒ´æÓÚeax 
+	mov eax,[ebp-4];;È¡ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½Õ»ï¿½Ò´ï¿½ï¿½ï¿½eax 
 	leave
 	ret 4
 ReverseInt endp

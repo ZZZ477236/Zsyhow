@@ -206,6 +206,8 @@ sudo || do as su || #
   快速目录列表
   - `tree`: 目录树
 # Vim
+
+#### 模式选择
 - `i`: 插入模式 insert
 - `r`: 替换模式 replace
 - `v`: 可视模式 visual
@@ -213,3 +215,119 @@ sudo || do as su || #
 - `ctrl v`: 块选择模式 block select
 - `esc`: 退出模式
 - `:`: 命令模式 command line
+- `w`: 写入文件 write
+- `q`: 退出文件 quit
+- `q!`: 强制退出文件 quit force
+- `wq`: 写入并退出文件 write quit
+- `wq!`: 强制写入并退出文件 write quit force
+  
+#### 移动操作
+- `h`: 左移光标 left
+- `j`: 下移光标 down
+- `k`: 上移光标 up
+- `l`: 右移光标 right
+- `w`: 右移一个单词 word
+- `b`: 左移一个单词 word
+- `e`: 右移到单词末尾 word end
+- `0`: 左移到行首 line beginning
+- `$`: 右移到行尾 line end
+- `^`: 左移到行首 line beginning
+- `G`: 跳转到文件末尾 go to end of file
+- `gg`: 跳转到文件开头 go to beginning of file
+
+#### 编辑操作
+- `gg=G`: 格式化文件 format file
+- `cc`: 删除当前行并进入插入模式 delete current line and enter insert mode
+- `cw`: 删除当前单词并进入插入模式 delete current word and enter insert mode
+- `ce`: 删除当前单词末尾并进入插入模式 delete current word end and enter insert mode
+-  删除
+- `d`: 删除选中内容 delete selected content
+- `D`: 删除当前行到行尾 delete to end of line
+- `dd`: 删除当前行 delete
+- `dw`: 删除当前单词 delete word
+- `d$`: 删除当前行到行尾 delete to end of line
+- `d0`: 删除当前行到行首 delete to beginning of line
+- 复制
+- `yy`: 复制当前行 copy
+- `粘贴 `:paste
+- `u`: 撤销 undo
+- `Ctrl r`: 重做 redo
+
+
+#### 搜索操作
+- `n`: 下一个匹配 next
+- `N`: 上一个匹配 previous
+- `/`: 搜索 search
+- `?`: 反向搜索 reverse search
+- `*`: 搜索当前单词 search current word
+- `#`: 反向搜索当前单词 reverse search current word
+- `%`: 匹配括号 match parentheses
+  
+
+#### 计数符
+- `2dw`: 删除两个单词 delete two words
+- `2dd`: 删除两行 delete two lines
+- `2j`: 下移两行 down two lines
+- `2k`: 上移两行 up two lines
+- `3w`: 右移三个单词 right three words
+ 
+#### 窗口管理
+- `:sp`     - Split window horizontally（水平分屏）
+- `:vsp`    - Split window vertically（垂直分屏）
+- `Ctrl + w + w` - Switch between windows（在窗口间切换）
+- `Ctrl + w + h/j/k/l` - Move to left/down/up/right window（移动到左/下/上/右窗口）
+- `Ctrl + w + q` - Close current window（关闭当前窗口）
+- `Ctrl + w + o` - Close all other windows（关闭其他窗口）
+- `Ctrl + w + =` - Equalize window sizes（均衡窗口大小）
+
+#### 多文件操作
+- `:e filename`  - Open file（打开文件）
+- `:bnext (bn)`  - Next buffer（切换到下一个缓冲区）
+- `:bprevious (bp)` - Previous buffer（切换到上一个缓冲区）
+- `:bd`          - Close current buffer（关闭当前缓冲区）
+- `:ls` or `:buffers` - List all buffers（列出所有缓冲区）
+- `:tabnew filename` - Open file in new tab（在新标签页打开文件）
+- `gt`           - Go to next tab（切换到下一个标签页）
+- `gT`           - Go to previous tab（切换到上一个标签页）
+- `:tabclose`    - Close current tab（关闭当前标签页）
+- `:tabonly`     - Close all other tabs（关闭其他所有标签页）
+
+#### 代码缩进与格式化
+- `>>`      - Indent right（右移缩进）
+- `<<`      - Indent left（左移缩进）
+- `=`       - Auto-align format（自动对齐格式化）
+
+```
+# vim 配置：
+touch ~/.vimrc
+set ai
+set number
+set showmatch
+set showmode
+set showcmd
+set warn
+set ruler
+set scrolloff=6
+set tabstop=4
+set wrap
+set shiftwidth=4
+set softtabstop=4
+set backspace=2
+set cursorline
+set hlsearch
+syntax enable
+syntax on
+set autoindent
+set smartindent
+```
+
+#### 搜索与替换
+- `:%s/old/new/g`  - Replace all occurrences of "old" with "new"（全局替换 old -> new）
+- `:%s/old/new/gc` - Replace with confirmation（替换时逐个确认）
+
+#### 宏录制（Macros）
+- `qa`      - Start recording macro in register 'a'（开始录制宏到 `a` 寄存器）
+- `q`       - Stop recording（停止录制）
+- `@a`      - Run macro stored in register 'a'（运行 `a` 寄存器中的宏）
+- `@@`      - Repeat last executed macro（重复上次执行的宏）
+
